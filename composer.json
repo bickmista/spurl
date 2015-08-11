@@ -1,0 +1,19 @@
+{
+  "name": "bickmista/spurl",
+  "description": "Spurl url manipulator",
+  "keywords": ["url"],
+  "type": "library",
+  "homepage": "https://github.com/bickmista/spurl",
+  "license": "MIT",
+  "author": "bickmista",
+  "require": {
+    "php": ">=5.4.0",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Spurl": ""
+    }
+  }
+}
