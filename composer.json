@@ -1,6 +1,6 @@
 {
   "name": "bickmista/spurl",
-  "description": "Spurl url manipulator",
+  "description": "A URL library that can validate, modify and split URL's. This library can split URL's into Subdomain, domain and TLD without choking when it comes to newer TLD's.",
   "keywords": ["url"],
   "type": "library",
   "homepage": "https://github.com/bickmista/spurl",
@@ -8,12 +8,10 @@
   "author": "bickmista",
   "require": {
     "php": ">=5.4.0",
-    "ext-curl": "*",
-    "ext-json": "*"
   },
   "autoload": {
     "psr-0": {
-      "Spurl": ""
+      "Spurl": "src"
     }
   }
 }
