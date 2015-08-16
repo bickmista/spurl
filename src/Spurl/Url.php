@@ -62,7 +62,7 @@ class Url
 
     if (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", $website, $domainTemp)) {
       return self::process($website, $domainTemp, $www);
-    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,10}$/", $website, $domainTemp)) {
+    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $website, $domainTemp)) {
       return self::process($website, $domainTemp, $www);
     } else {
       return $website;
