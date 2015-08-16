@@ -13,7 +13,7 @@ $splitUrl = Spurl\Url::split($url);
 ```
 
 [travis-url]: https://travis-ci.org/bickmista/spurl
-[travis-image]: https://travis-ci.org/bickmista/spurl.svg)
+[travis-image]: https://travis-ci.org/bickmista/spurl.svg
 
 [codeclimate-url]: https://codeclimate.com/github/bickmista/spurl
 [codeclimate-quality]: https://codeclimate.com/github/bickmista/spurl/badges/gpa.svg
