@@ -69,6 +69,14 @@ class Url
     }
   }
 
+  public static function build($parts)
+  {
+    $protocol = $parts['protocol'].'://';
+    $domain = (gettype($parts['subdomain']) === 'array' ? implode('.', $parts['subdomain']) : $parts['subdomain']) . '.' . $parts['domain'] . '.' . (gettype($parts['tld']) === 'array' ? implode('.', $parts['tld']) : $parts['tld']) . '/';
+    $path = (gettype($parts['path']) === 'array' ? implode('/', $parts['path']) : $parts['path']) . '/';
+    return $protocol . $domain . $path;
+  }
+
   public static function isValid($url)
   {
     return true;
