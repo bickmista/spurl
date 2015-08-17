@@ -3,5 +3,5 @@
 
   interface Config
   {
-    const dereferer = 'http://hideref.org/?';
+    const Dereferer = 'http://hideref.org/?';
   }

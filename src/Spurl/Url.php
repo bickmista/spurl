@@ -12,7 +12,7 @@ class Url
     $domainTld = $t[0];
     $domainTldArray = explode('.', $domainTld, 2);
 
-    $prefix = ($www == false ? trim(str_replace($domainTld, '', $w), '.') : 'www');
+    $prefix = ($www === false ? trim(str_replace($domainTld, '', $w), '.') : 'www');
     $domain = $domainTldArray[0];
     $suffix = $domainTldArray[1];
 
@@ -51,7 +51,7 @@ class Url
     $website = self::clean($url);
     $www = false;
 
-    if ($website == false) {
+    if ($website === false) {
       return $url;
     }
 
@@ -76,6 +76,6 @@ class Url
 
   public static function derefer($url)
   {
-    return dereferer . $url;
+    return Dereferer . $url;
   }
 }
