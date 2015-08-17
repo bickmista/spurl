@@ -1,6 +1,6 @@
 <?php
 
-Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
+Class SpurlBuildTest extends \PHPUnit_Framework_TestCase
 {
   public function buildUrlTest()
   {
