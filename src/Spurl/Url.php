@@ -17,7 +17,7 @@ class Url
 
     // Break down host
     if (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", $parts['host'], $domain)) {
-    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $website, $domain)) {
+    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $parts['host'], $domain)) {
     }
 
     $tld = $domain[0];
