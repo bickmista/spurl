@@ -13,7 +13,7 @@ Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($url['path'], 'example');
   }
 
-  public function testNewTldExtendedShatter()
+  public function testNewTld()
   {
     $url = Spurl\Url::shatter('http://www.test.versicherung/example');
     $this->assertArrayHasKey('protocol', $url);
