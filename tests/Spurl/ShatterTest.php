@@ -4,7 +4,7 @@ Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
 {
   public function testStandardUrl()
   {
-    $url = Spurl\Url::break('http://www.test.co.uk/example');
+    $url = Spurl\Url::shatter('http://www.test.co.uk/example');
     $this->assertArrayHasKey('protocol', $url);
     $this->assertEquals($url['protocol'], 'http');
     $this->assertArrayHasKey('host', $url);
@@ -13,9 +13,9 @@ Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($url['path'], 'example');
   }
 
-  public function testNewTldExtendedBreak()
+  public function testNewTldExtendedShatter()
   {
-    $url = Spurl\Url::break('http://www.test.versicherung/example');
+    $url = Spurl\Url::shatter('http://www.test.versicherung/example');
     $this->assertArrayHasKey('protocol', $url);
     $this->assertEquals($url['protocol'], 'http');
     $this->assertArrayHasKey('host', $url);
@@ -24,9 +24,9 @@ Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($url['path'], 'example');
   }
 
-  public function testExtendedBreak()
+  public function testExtendedShatter()
   {
-    $url = Spurl\Url::break('http://www.test.co.uk/example', true);
+    $url = Spurl\Url::shatter('http://www.test.co.uk/example', true);
     $this->assertArrayHasKey('prefix', $url['host']);
     $this->assertEquals($url['host']['prefix'], 'www');
     $this->assertArrayHasKey('domain', $url['host']);
@@ -35,9 +35,9 @@ Class SpurlSplitTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($url['host']['suffix'], 'co.uk');
   }
 
-  public function testNewTldExtendedBreak()
+  public function testNewTldExtendedShatter()
   {
-    $url = Spurl\Url::break('http://www.test.versicherung/example');
+    $url = Spurl\Url::shatter('http://www.test.versicherung/example');
     $this->assertArrayHasKey('prefix', $url['host']);
     $this->assertEquals($url['host']['prefix'], 'www');
     $this->assertArrayHasKey('domain', $url['host']);

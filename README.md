@@ -45,14 +45,14 @@ composer require bickmista/spurl
 
 ### General
 
-#### Break
+#### Shatter
 
-To break down a URL into segments pass it into our break function.
+To break down a URL into segments pass it into our shatter function.
 
 ```php
 $url = 'http://test.com/example/path?some=query#anchor';
 
-$splitUrl = Spurl\Url::break($url);
+$splitUrl = Spurl\Url::shatter($url);
 ```
 
 #### Build

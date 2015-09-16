@@ -5,7 +5,7 @@ use Spurl\Config;
 
 class Url
 {
-  public static function break($url, $full = false)
+  public static function shatter($url, $full = false)
   {
     // Initial splitting of URL
     preg_match('/(?:(?<protocol>(?:http|ftp|irc)s?)?:\/\/)?(?:(?<user>[^:\n\r]+):(?<pass>[^@\n\r]+)@)?(?<host>(?:[^:\/\n\r]+)?)(?::(?<port>\d+))?\/?(?<path>[^?#\n\r]+)?\??(?<query>[^#\n\r]*)?\#?(?<anchor>[^\n\r]*)?/', $url, $parts);
