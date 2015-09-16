@@ -5,81 +5,45 @@ use Spurl\Config;
 
 class Url
 {
-  private static $protocol = null;
-
-  private static function process($w, $t, $www)
+  public static function break($url, $full = false)
   {
-    $domainTld = $t[0];
-    $domainTldArray = explode('.', $domainTld, 2);
+    // Initial splitting of URL
+    preg_match('/(?:(?<protocol>(?:http|ftp|irc)s?)?:\/\/)?(?:(?<user>[^:\n\r]+):(?<pass>[^@\n\r]+)@)?(?<host>(?:[^:\/\n\r]+)?)(?::(?<port>\d+))?\/?(?<path>[^?#\n\r]+)?\??(?<query>[^#\n\r]*)?\#?(?<anchor>[^\n\r]*)?/', $url, $parts);
 
-    $prefix = ($www === false ? trim(str_replace($domainTld, '', $w), '.') : 'www');
-    $domain = $domainTldArray[0];
-    $suffix = $domainTldArray[1];
+    // Check if its a full split
+    if ($full === false) {
+      return array_filter($parts);
+    }
+
+    // Break down host
+    if (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", $parts['host'], $domain)) {
+    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $website, $domain)) {
+    }
+
+    $tld = $domain[0];
+    $tldArray = explode('.', $tld, 2);
+
+    $prefix = trim(str_replace($tld, '', $parts['host']), '.');
+    $domain = $tldArray[0];
+    $suffix = $tldArray[1];
 
     $splitUrl = [
-      $prefix,
-      $domain,
-      $suffix,
+      'prefix' => $prefix,
+      'domain' => $domain,
+      'suffix' => $suffix,
     ];
 
-    return $splitUrl;
-  }
+    $parts['host'] = $splitUrl;
 
-  public static function clean($url)
-  {
-    if (empty($url)) {
-        return false;
-    }
-    $url = strtolower($url);
-    $arr = array("http://" => "", "https://" => "");
-    $website = strtr($url, $arr);
-    preg_match("/([^\/\r\n]+)(\/[^\r\n]*)?/", $website, $domain);
-
-    if (isset($domain[1])) {
-        return $domain[1];
-    }
-
-    return false;
-  }
-
-  public static function split($url)
-  {
-    if (empty($url)) {
-      return false;
-    }
-
-    $website = self::clean($url);
-    $www = false;
-
-    if ($website === false) {
-      return $url;
-    }
-
-    if (strpos($website, 'www.') !== false) {
-      $website = str_replace('www.', '', $website);
-      $www = true;
-    }
-
-    if (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", $website, $domainTemp)) {
-      return self::process($website, $domainTemp, $www);
-    } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $website, $domainTemp)) {
-      return self::process($website, $domainTemp, $www);
-    } else {
-      return $website;
-    }
+    return array_filter($parts);
   }
 
   public static function build($parts)
   {
     $protocol = $parts['protocol'].'://';
-    $domain = (gettype($parts['subdomain']) === 'array' ? implode('.', $parts['subdomain']) : $parts['subdomain']) . '.' . $parts['domain'] . '.' . (gettype($parts['tld']) === 'array' ? implode('.', $parts['tld']) : $parts['tld']) . '/';
+    $domain = (gettype($parts['host']) === 'array' ? implode('.', $parts['host']) : $parts['host']) . '/';
     $path = (gettype($parts['path']) === 'array' ? implode('/', $parts['path']) : $parts['path']) . '/';
     return $protocol . $domain . $path;
-  }
-
-  public static function isValid($url)
-  {
-    return true;
   }
 
   public static function derefer($url)
