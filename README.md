@@ -25,7 +25,7 @@ A PHP Library that can break down and build URLs into/from an array.
 
 ### Using Composer
 
-To install Spurl with Composer, just add the following to your composer.json file:
+To install Spurl with Composer, just add the following to your composer.json file
 
 ```json
 {

@@ -7,6 +7,10 @@ php:
   - 5.4
   - hhvm
 
+addons:
+  code_climate:
+      repo_token: 442becbacbcc48244a5ee2fa2cec4eedff3ecc8b9b9fb1d1ef6cf3dd4654800d
+
 before_script:
   - composer selfupdate
   - composer install

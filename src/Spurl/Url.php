@@ -7,6 +7,10 @@ class Url
 {
   public static function shatter($url, $full = false)
   {
+    if (empty($url)) {
+        throw new \Exception('No url has been passed');
+    }
+
     // Initial splitting of URL
     preg_match('/(?:(?<protocol>(?:http|ftp|irc)s?)?:\/\/)?(?:(?<user>[^:\n\r]+):(?<pass>[^@\n\r]+)@)?(?<host>(?:[^:\/\n\r]+)?)(?::(?<port>\d+))?\/?(?<path>[^?#\n\r]+)?\??(?<query>[^#\n\r]*)?\#?(?<anchor>[^\n\r]*)?/', $url, $parts);
 
@@ -15,9 +19,17 @@ class Url
       return array_filter($parts);
     }
 
+    $matched = false;
+
     // Break down host
     if (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", $parts['host'], $domain)) {
+      $matched = true;
     } elseif (preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{7,12}$/", $parts['host'], $domain)) {
+      $matched = true;
+    }
+
+    if(!$matched) {
+      throw new \Exception('URL could not be split fully');
     }
 
     $tld = $domain[0];
@@ -40,6 +52,10 @@ class Url
 
   public static function build($parts)
   {
+    if(!isset($parts['host'])) {
+      throw new \Exception('No host is set');
+    }
+
     $url = [];
 
     $url['protocol'] = (isset($parts['protocol']) ? $parts['protocol'] . '://' : '');
@@ -51,6 +67,6 @@ class Url
 
   public static function derefer($url)
   {
-    return Dereferer . $url;
+    return DEREFERER . $url;
   }
 }
