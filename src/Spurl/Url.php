@@ -40,10 +40,13 @@ class Url
 
   public static function build($parts)
   {
-    $protocol = $parts['protocol'].'://';
-    $domain = (gettype($parts['host']) === 'array' ? implode('.', $parts['host']) : $parts['host']) . '/';
-    $path = (gettype($parts['path']) === 'array' ? implode('/', $parts['path']) : $parts['path']) . '/';
-    return $protocol . $domain . $path;
+    $url = [];
+
+    $url['protocol'] = (isset($parts['protocol']) ? $parts['protocol'] . '://' : '');
+    $url['host'] = (gettype($parts['host']) === 'array' ? implode('.', $parts['host']) : $parts['host']) . '/';
+    $url['path'] = (isset($parts['path']) ? (gettype($parts['path']) === 'array' ? implode('/', $parts['path']) : $parts['path']) . '/' : '');
+
+    return (implode('', $url));
   }
 
   public static function derefer($url)
