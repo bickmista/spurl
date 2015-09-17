@@ -55,9 +55,37 @@ $url = 'http://test.com/example/path?some=query#anchor';
 $splitUrl = Spurl\Url::shatter($url);
 ```
 
-#### Build
+The output from the shatter function in the example above would be
 
+```php
+$splitUrl = [
+  'protocol' => 'http',
+  'host' => 'test.com',
+  'path' => 'example/path',
+  'query' => 'some=query',
+  'anchor' => 'anchor'
+];
+```
 
+You can also break down URLs further by passing `true` as an optional second parameter
+
+```php
+$url = 'http://test.com/';
+
+$splitUrl = Spurl\Url::shatter($url, true);
+```
+
+which would return
+
+```php
+$splitUrl = [
+  'protocol' => 'http',
+  'host' => [
+    'domain' => 'test',
+    'suffix' => 'com'
+  ]
+];
+```
 
 ----
 
