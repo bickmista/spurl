@@ -67,6 +67,6 @@ class Url
 
   public static function derefer($url)
   {
-    return Dereferer . $url;
+    return DEREFERER . $url;
   }
 }
